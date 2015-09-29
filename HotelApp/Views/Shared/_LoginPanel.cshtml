@@ -1,0 +1,62 @@
+﻿@{
+    var userSession = (HotelApp.user)Session["user"];
+}
+<div class="loginPanel">
+    @if (userSession == null)
+    {
+        using (Html.BeginForm("Login", "Account", FormMethod.Post))
+        {
+        <input name="logEmail" type="email" placeholder="Enter your e-mail" class="marginUD" />
+        <input name="logPass" type="password" placeholder="Enter your password" class="marginUD" />
+        <button type="submit" id="login_index" class="marginUD">Sign in</button>
+        }
+        <a href="@Url.Action("Forgot", "Account")">
+            <button id="forgot_index" class="marginUD">Forgot password</button></a>
+        <a href="@Url.Action("Register", "Account")">
+            <button id="register_index" class="marginUD">Create new account</button></a>
+    }
+    else
+    {
+        <button style="opacity:0.7" disabled="disabled" id="userLabel" class="marginUD">You are signed in as: @userSession.email</button>
+        <a href="@Url.Action("Logout", "Account")">
+            <button id="logout_index" class="marginUD">Sign out</button></a>
+        <br />
+        <a href="@Url.Action("User", "Reservation")">
+            <button id="user_res" class="marginUD">Your reservations</button></a>
+        <a href="@Url.Action("Index", "Account")">
+            <button id="user_index" class="marginUD">User settings</button></a>
+    }
+</div>
+<script type="text/javascript">
+    $("#userLabel").button();
+    $("#user_res").button({
+        icons: {
+            secondary: "ui-icon-folder-open"
+        }
+    });
+    $("#user_index").button({
+        icons: {
+            secondary: "ui-icon-gear"
+        }
+    });
+    $("#forgot_index").button({
+        icons: {
+            secondary: "ui-icon-help"
+        }
+    });
+    $("#register_index").button({
+        icons: {
+            secondary: "ui-icon-pencil"
+        }
+    });
+    $("#login_index").button({
+        icons: {
+            secondary: "ui-icon-check"
+        }
+    });
+    $("#logout_index").button({
+        icons: {
+            secondary: "ui-icon-closethick"
+        }
+    });
+</script>

@@ -1,0 +1,63 @@
+﻿@model HotelApp.Models.Message
+@{
+    string text = "test";
+    if (Model != null)
+    {
+        if (Model.type == 0)
+        { text = "Error"; }
+        else
+        { text = "Succes"; }
+    }
+    ViewBag.Title = "Mohijto Soho Hotel. | World's most luxury hotel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="main">
+    <ul id="slider1">
+        <li>
+            <img src="~/Content/images/homeSlider/transp.png" alt=""></li>
+        <li>
+            <img src="~/Content/images/homeSlider/Greece-beach.jpg" alt=""></li>
+    </ul>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#slider1').bind('initialized slide_complete', function () {
+            $('link[href*=favicon]').detach().appendTo('head');
+        });
+
+        $('#slider1').anythingSlider({
+            theme: "default",
+            delay: 4500,
+            autoPlay: true,
+            hashTags: false,
+            buildArrows: false,
+            pauseOnHover: false,
+            animationTime: 1500,
+            buildStartStop: false,
+            buildNavigation: false,
+        });
+
+    });
+</script>
+@if (Model != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#dialog-message").dialog({
+                modal: true,
+                buttons: {
+                    Ok: function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        });
+    </script>
+    <div id="dialog-message" title="@text">
+        <ul id="icons" class="ui-widget ui-helper-clearfix">
+            <li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-notice"></span></li>
+            <li>@Model.text</li>
+        </ul>
+    </div>
+}

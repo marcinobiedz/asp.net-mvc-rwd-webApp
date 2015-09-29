@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HotelDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="HotelDBEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="discounts" EntityType="HotelDBModel.discount" />
+    <EntitySet Name="reservations" EntityType="HotelDBModel.reservation" />
+    <EntitySet Name="users" EntityType="HotelDBModel.user" />
+    <AssociationSet Name="user_id_FK" Association="HotelDBModel.user_id_FK">
+      <End Role="users" EntitySet="users" />
+      <End Role="reservations" EntitySet="reservations" />
+    </AssociationSet>
+    <EntitySet Name="rooms" EntityType="HotelDBModel.room" />
+    <AssociationSet Name="room_id_FK" Association="HotelDBModel.room_id_FK">
+      <End Role="room" EntitySet="rooms" />
+      <End Role="reservation" EntitySet="reservations" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="discount">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="value" Type="Int32" Nullable="false" />
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="reservation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="end_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="room_id" Type="Int32" Nullable="false" />
+    <Property Name="days" Type="Int32" Nullable="false" />
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="user" Relationship="HotelDBModel.user_id_FK" FromRole="reservations" ToRole="users" />
+    <NavigationProperty Name="room" Relationship="HotelDBModel.room_id_FK" FromRole="reservation" ToRole="room" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="password_salt" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="surname" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="country" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="birth_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="admin" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="reservations" Relationship="HotelDBModel.user_id_FK" FromRole="users" ToRole="reservations" />
+  </EntityType>
+  <Association Name="user_id_FK">
+    <End Role="users" Type="HotelDBModel.user" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="reservations" Type="HotelDBModel.reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reservations">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="room">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="number" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="floor" Nullable="false" />
+    <Property Type="Int32" Name="places" Nullable="false" />
+    <Property Type="String" Name="kitchen" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="bathroom" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="discount" Nullable="false" />
+    <Property Type="Decimal" Name="price" Nullable="false" Precision="19" Scale="4" />
+    <Property Type="Int32" Name="size" Nullable="false" />
+    <Property Type="String" Name="view" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="reservations" Relationship="HotelDBModel.room_id_FK" FromRole="room" ToRole="reservation" />
+  </EntityType>
+  <Association Name="room_id_FK">
+    <End Type="HotelDBModel.room" Role="room" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="HotelDBModel.reservation" Role="reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="room">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reservation">
+        <PropertyRef Name="room_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

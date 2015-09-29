@@ -1,0 +1,50 @@
+﻿@model HotelApp.Models.Message
+@{
+    string text = "test";
+    if (Model != null)
+    {
+        if (Model.type == 0)
+        { text = "Error"; }
+        else
+        { text = "Succes"; }
+    }
+    ViewBag.Title = "Mohijto Soho Hotel.";
+    Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
+}
+@if ((HotelApp.user)Session["user"] == null)
+{
+    <span class="logo_2">Place where beauty is meeting with luxury</span>
+    using (Html.BeginForm("Login", "Account", FormMethod.Post))
+    {
+    <div class="ui-field-contain">
+        <label for="logEmail">E-mail:</label>
+        @Html.TextBox("logEmail", null, new { @id = "logEmail", @placeholder = "Type your e-mail address...", @type = "email" })
+    </div>
+    <div class="ui-field-contain">
+        <label for="logPass">Password:</label>
+        @Html.Password("logPass", null, new { @id = "logPass", @autocomplete = "off", @type = "password", @placeholder = "Type your password..." })
+    </div>
+    <div class="ui-field-contain">
+        <button type="submit" class="ui-btn ui-icon-check ui-btn-icon-right">Sign in</button>
+    </div>
+    }
+}
+else
+{
+    <h2>Index</h2>
+}
+@if (Model != null)
+{
+    <div data-role="popup" id="popupBasic" data-icon="delete">
+        <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+        <h2>@text</h2>
+        <p>@Model.text</p>
+    </div>
+    <script type="text/javascript">
+        $(document).on('pageinit', '.ui-page', function (event) {
+            setTimeout(function () {
+                $('#popupBasic').popup('open');
+            }, 200);
+        })
+    </script>
+}

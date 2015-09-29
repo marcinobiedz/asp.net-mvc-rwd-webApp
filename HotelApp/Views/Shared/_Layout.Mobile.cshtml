@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <div data-role="page" data-theme="a">
+        @Styles.Render("~/Content/Mobile/css", "~/Content/jquerymobile/css")
+        @Scripts.Render("~/bundles/jquery", "~/bundles/jquerymobile")
+        <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.mobile.ajaxEnabled = false;
+            });
+        </script>
+        <div data-role="header" style="overflow: hidden;" data-position="fixed">
+            <h1>@ViewBag.Title</h1>
+            <a href="@Url.Action("Index", "Home")" data-icon="home" class="ui-btn-left">Home</a>
+            @if ((HotelApp.user)Session["user"] == null)
+            {
+                <a href="@Url.Action("Index", "Home")" data-icon="check" data-iconpos="right" class="ui-btn-right">Sign in</a>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="@Url.Action("Register", "Account")">Register</a></li>
+                        <li><a href="@Url.Action("Forgot", "Account")">Forgot password</a></li>
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <a href="@Url.Action("Logout", "Account")" data-icon="delete" data-iconpos="right" class="ui-btn-right">Sign out</a>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="@Url.Action("User", "Reservation")">Your reservations</a></li>
+                        <li><a href="@Url.Action("Index", "Account")">User settings</a></li>
+                    </ul>
+                </div>
+            }
+        </div>
+
+        <div data-role="content">
+            @RenderSection("featured", false)
+            @RenderBody()
+        </div>
+
+        <div data-role="footer" style="overflow: hidden;" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="@Url.Action("Index", "Reservation")">Reservation</a></li>
+                    <li><a href="@Url.Action("Index", "Room")">Hotel rooms</a></li>
+                    <li><a href="@Url.Action("Index", "Contact")">Contact</a></li>
+                </ul>
+            </div>
+            <h4 style="text-align: center;">© 2014 Mohijto Soho Hotel.</h4>
+        </div>
+    </div>
+</body>
+</html>

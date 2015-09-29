@@ -1,0 +1,80 @@
+﻿@model List<HotelApp.room>
+@{
+    ViewBag.Title = "Hotel rooms | Mohijto Soho Hotel.";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="commonDiv">
+    <div class="mainWrap" style="overflow-y: scroll">
+        @if (Model == null || Model.Count() == 0)
+        {
+            <div class="ui-widget">
+                <div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
+                    <p>
+                        <span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+                        <strong>Info: </strong>There are not rooms in hotel's database. 
+                    </p>
+                </div>
+            </div>
+        }
+        else
+        { 
+            <div class="accordion-resizer">
+                <div id="accordion">
+                    @foreach (var room in Model)
+                    {
+                        string photoSrc = "/RoomPhotos/" + room.number + "/1.jpg";
+                        string photoSrc_2 = "/RoomPhotos/" + room.number + "/2.jpg";
+                        <h3>Room <strong>#@room.number</strong>, Storey: <strong>@room.floor</strong>, Number of places: <strong>@room.places</strong></h3>
+                        <div>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="width: 510px">
+                                        <img width="250px" height="200px" src="@photoSrc" />
+                                        <img width="250px" height="200px" src="@photoSrc_2" />
+                                    </td>
+                                    <td>
+                                        <strong>Bathroom</strong>: @room.bathroom
+                                        <br />
+                                        <br />
+                                        <strong>Kitchen</strong>: @room.kitchen
+                                        <br />
+                                        <br />
+                                        <strong>Size</strong>: @room.size sqm
+                                        <br />
+                                        <br />
+                                        <strong>View</strong>: @room.view
+                                    </td>
+                                    <td>
+                                        <span style="font-size: 40px">&euro; @room.price</span>
+                                        <br />
+                                        /night
+                                        @if ((HotelApp.user)Session["user"] != null)
+                                        {
+                                            <br />
+                                            <br />
+                                            <a href="@Url.Action("Index", "Reservation", new { id = room.id })">
+                                                <button id="book_rooms" class="marginUD">Book now</button></a>
+                                        }
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script type="text/javascript">
+    $("#accordion").accordion({
+        collapsible: true,
+        active: false,
+        heightStyle: "content"
+    });
+    $("#ui-accordion-accordion-header-0").css("margin-top", "0px");
+    $("button[id=book_rooms]").button({
+        icons: {
+            secondary: "ui-icon-calendar"
+        }
+    });
+</script>

@@ -1,0 +1,131 @@
+﻿@model HotelApp.Models.Message
+@{
+    string text = "test";
+    if (Model != null)
+    {
+        if (Model.type == 0)
+        { text = "Error"; }
+        else
+        { text = "Succes"; }
+    }
+    var regions = new HotelApp.Models.Countries();
+    ViewBag.Title = "Register | Mohijto Soho Hotel.";
+    Layout = "~/Views/Shared/_Layout.cshtml";    
+}
+<div class="commonDiv">
+    <div class="mainWrap">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+        {
+            <fieldset>
+                <legend>CREATE NEW ACCOUNT</legend>
+                <table>
+                    <tr>
+                        <td>
+                            <table class="regTable">
+                                <tr>
+                                    <td>
+                                        <label>E-mail address:</label>
+                                    </td>
+                                    <td>
+                                        @Html.TextBox("regEmail", null, new { @type = "email", @placeholder = "Enter your email" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Password:</label>
+                                    </td>
+                                    <td>
+                                        @Html.Password("regPass", null, new { @type = "password", @placeholder = "Between 6-10 marks" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Confirm password:</label>
+                                    </td>
+                                    <td>
+                                        @Html.Password("regConfPass", null, new { @type = "password", @placeholder = "Same as previous field" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Your name:</label>
+                                    </td>
+                                    <td>
+                                        @Html.TextBox("regName", null, new { @type = "text", @placeholder = "Enter your name" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Your surname:</label>
+                                    </td>
+                                    <td>
+                                        @Html.TextBox("regSurname", null, new { @type = "text", @placeholder = "Enter your surname" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Your nationality region:</label>
+                                    </td>
+                                    <td>
+                                        @Html.DropDownList("regCountry", regions.countryList, "Choose your region", new { @id = "combobox" })
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <label>Choose your birth date:</label>
+                            <div id="datepicker"></div>
+                            @Html.Hidden("regBirth", null, new { @id = "regBirth" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left">
+                            <ul id="icons" class="ui-widget ui-helper-clearfix">
+                                <li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-notice"></span></li>
+                                <li>All FIELDS MUST BE FILLED TO CREATE NEW ACCOUNT</li>
+                            </ul>
+                            <td style="text-align: right">
+                                <input type="submit" value="Confirm" /></td>
+                    </tr>
+                </table>
+            </fieldset>
+        }
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#datepicker').datepicker({
+            yearRange: "1930:2020",
+            maxDate: "-18y",
+            firstDay: 1,
+            dateFormat: "yy-mm-dd",
+            onSelect: function (date) {
+                $("#regBirth").val(date);
+            },
+            changeMonth: true,
+            changeYear: true
+        });
+    });
+</script>
+@if (Model != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#dialog-message").dialog({
+                modal: true,
+                buttons: {
+                    Ok: function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        });
+    </script>
+    <div id="dialog-message" title="@text">
+        <ul id="icons" class="ui-widget ui-helper-clearfix">
+            <li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-notice"></span></li>
+            <li>@Model.text</li>
+        </ul>
+    </div>
+}
+

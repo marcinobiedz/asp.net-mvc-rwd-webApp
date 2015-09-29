@@ -1,0 +1,73 @@
+﻿@model HotelApp.Models.Message
+@{    
+    string text = "test";
+    if (Model != null)
+    {
+        if (Model.type == 0)
+        { text = "Error"; }
+        else
+        { text = "Succes"; }
+    }
+    HotelApp.user userSession = (HotelApp.user)Session["user"];
+    List<HotelApp.reservation> res = new List<HotelApp.reservation>();
+    using (var db = new HotelApp.HotelDBEntities())
+    {
+        var reservs = db.reservations.Where(x => x.user_id == userSession.id).OrderBy(p => p.start_date).ToList();
+        res = reservs;
+    }
+    ViewBag.Title = "Reservations | H.";
+    Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
+}
+<h1>Click to delete</h1>
+@if (res.Count() == 0)
+{
+    <div class="ui-field-contain">
+        <button type="button" disabled="disabled" data-icon="eye">
+            <strong>Info: </strong>You don't have any
+            <br />
+            reservations.</button>
+    </div>
+}
+else
+{ 
+    <ul data-role="listview">
+        @foreach (var reserv in res)
+        {
+            <li><a href="@Url.Action("Delete", "Reservation", new { reserv.id })" onclick="return myConfirm(this)">
+                @reserv.start_date.ToShortDateString() to @reserv.end_date.ToShortDateString()
+            </a></li>
+        }
+    </ul>
+}
+<script type="text/javascript">
+    function myConfirm(data) {
+        var popupDial = $("#popupHref");
+        popupHref.href = data.href;
+        $('#popupQuestion').popup('open');
+        return false;
+    }
+</script>
+<div data-role="popup" id="popupQuestion" data-icon="delete">
+    <div data-role="header" data-theme="a">
+        <h1>Delete?</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <a href="#" id="popupHref" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b optionConfirm">Yes, delete</a>
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b optionCancel" data-rel="back">No</a>
+    </div>
+</div>
+@if (Model != null)
+{
+    <div data-role="popup" id="popupBasic" data-icon="delete">
+        <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+        <h2>@text</h2>
+        <p>@Model.text</p>
+    </div>
+    <script type="text/javascript">
+        $(document).on('pageinit', '.ui-page', function (event) {
+            setTimeout(function () {
+                $('#popupBasic').popup('open');
+            }, 200);
+        })
+    </script>
+}

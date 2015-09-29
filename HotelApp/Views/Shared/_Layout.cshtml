@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jqueryui")
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    @RenderSection("scripts", required: false)
+    <link rel="shortcut icon" href="~/Content/images/favicon.ico" />
+</head>
+<body>
+    <div class="topStrip"></div>
+    <div class="pageHead">
+        <table style="width: 100%">
+            <tr>
+                <td>
+                    @Html.Partial("_Logo")
+                </td>
+                <td style="text-align: right;">
+                    @Html.Partial("_LoginPanel")
+                </td>
+            </tr>
+        </table>
+    </div>
+    @Html.Partial("_ButtonStrip")
+    @RenderBody()
+    <div class="bottomStrip">
+        © 2014 Mohijto Soho Hotel. All Rights Reserved
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $("input[type=email], input[type=password], input[type=text]").addClass("myTextbox");
+            $("input[type=email], input[type=password], input[type=text]").attr("maxlength", 100);
+            $("select[id=combobox]").addClass("myComboBox");
+            $("input[type=submit]").button();            
+        });
+    </script>
+</body>
+</html>

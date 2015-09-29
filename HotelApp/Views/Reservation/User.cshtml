@@ -1,0 +1,110 @@
+﻿@model HotelApp.Models.Message
+@{    
+    string text = "test";
+    if (Model != null)
+    {
+        if (Model.type == 0)
+        { text = "Error"; }
+        else
+        { text = "Succes"; }
+    }
+    HotelApp.user userSession = (HotelApp.user)Session["user"];
+    List<HotelApp.reservation> res = new List<HotelApp.reservation>();
+    using (var db = new HotelApp.HotelDBEntities())
+    {
+        var reservs = db.reservations.Where(x => x.user_id == userSession.id).OrderBy(p => p.start_date).ToList();
+        res = reservs;
+    }
+    ViewBag.Title = "User's reservations | Mohijto Soho Hotel.";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="commonDiv">
+    <div class="mainWrap" style="position: relative">
+        @if (res.Count() == 0)
+        {
+            <div class="ui-widget">
+                <div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
+                    <p>
+                        <span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+                        <strong>Info: </strong>You don't have any reservations. 
+                    </p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="resDiv" style="color: white">
+                <table style="width: 550px">
+                    <tr>
+                        <th>Room number</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                        <th>Nights</th>
+                        <th>Delete</th>
+                    </tr>
+                    @foreach (var reserv in res)
+                    {
+                        <tr>
+                            <td>@reserv.room_id</td>
+                            <td>@reserv.start_date.ToShortDateString()</td>
+                            <td>@reserv.end_date.ToShortDateString()</td>
+                            <td>@reserv.days</td>
+                            <td>
+                                <a href="@Url.Action("Delete", "Reservation", new { reserv.id })" onclick="return myConfirm(this)">
+                                    <button id="delete_RES">Delete this res.</button></a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        }
+    </div>
+</div>
+<script type="text/javascript">
+    $("button[id=delete_RES]").button({
+        icons: {
+            secondary: "ui-icon-closethick"
+        }
+    });
+    function myConfirm(data) {
+        var link = data;
+        $("#dialog-confirm").dialog({
+            resizable: false,
+            modal: true,
+            buttons: {
+                "Yes I'm sure": function () {
+                    location.href = link.href;
+                    $(this).dialog("close");
+                },
+                Cancel: function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+        return false;
+    }
+</script>
+<div style="display: none" id="dialog-confirm" title="Are You sure?">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>You want to delete this reservation?</p>
+</div>
+@if (Model != null)
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#dialog-message").dialog({
+                modal: true,
+                buttons: {
+                    Ok: function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        });
+    </script>
+    <div id="dialog-message" title="@text">
+        <ul id="icons" class="ui-widget ui-helper-clearfix">
+            <li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-notice"></span></li>
+            <li>@Model.text</li>
+        </ul>
+    </div>
+}

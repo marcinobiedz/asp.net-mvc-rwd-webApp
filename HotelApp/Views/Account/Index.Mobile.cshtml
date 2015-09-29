@@ -1,0 +1,99 @@
+﻿@model HotelApp.Models.UserPanel
+@{
+    string text = "test";
+    if (!(String.IsNullOrEmpty(Model.info.text)))
+    {
+        if (Model.info.type == 0)
+        { text = "Error"; }
+        else
+        { text = "Succes"; }
+    }
+    ViewBag.Title = "User account | H.";
+    Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
+    var regions = new HotelApp.Models.Countries();
+    foreach (SelectListItem item in regions.countryList)
+    {
+        if (item.Value == Model.user.country)
+        { item.Selected = true; }
+    }
+    string userDate = Model.user.birth_date.ToShortDateString();
+}
+<div class="ui-field-contain">
+    <div class="ui-alt-icon" style="display: inline">
+        <a class="ui-btn ui-shadow ui-corner-all ui-icon-eye ui-btn-icon-notext ui-btn-inline"></a>
+    </div>
+    <div style="display: inline">
+        CORRECT THOSE YOU WANT CHANGE
+    </div>
+</div>
+@using (Html.BeginForm("Index", "Account", FormMethod.Post, new { @onsubmit = "return confirmNew()" }))
+{
+    <div class="ui-field-contain">
+        <label>Your e-mail address:</label>
+        @Html.TextBoxFor(m => m.user.email, new { @type = "email", @placeholder = "Enter your email", @disabled = "" })
+    </div>
+    <div class="ui-field-contain">
+        <label>New password:</label>
+        @Html.PasswordFor(m => m.user.password, new { @type = "password", @placeholder = "Type if you're changing" })
+    </div>
+    <div class="ui-field-contain">
+        <label>Your name:</label>
+        @Html.TextBoxFor(m => m.user.name, new { @type = "text", @placeholder = "Enter your name" })
+    </div>
+    <div class="ui-field-contain">
+        <label>Your surname:</label>
+        @Html.TextBoxFor(m => m.user.surname, new { @type = "text", @placeholder = "Enter your surname" })
+    </div>
+    <div class="ui-field-contain">
+        <label>Your nationality region:</label>
+        @Html.DropDownListFor(m => m.user.country, regions.countryList)
+    </div>
+    <div class="ui-field-contain">
+        <label>Change your birth date:</label>
+        @Html.TextBox("userBirth", userDate, new { @id = "userBirth", @type = "date" })
+    </div>
+    <div class="ui-field-contain">
+        <button type="submit" class="ui-btn ui-icon-recycle ui-btn-icon-right">Confirm changes</button>
+    </div>
+}
+<div data-role="popup" id="popupDataBirth">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+    <h2>Error</h2>
+    <p>You cannot bo younger then 18 years or date is in incorrent format.</p>
+</div>
+<script type="text/ecmascript">
+    function confirmNew() {
+        var depenDate = new Date();
+        depenDate.setYear(depenDate.getYear() - 18);
+        var userDate = $("#userBirth").val();
+        var date_regex = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+
+        if (!(date_regex.test(userDate))) {
+            $('#popupDataBirth').popup('open');
+            return false;
+        } else {
+            var userD = new Date(userDate);
+            if (userD > depenDate) {
+                $('#popupDataBirth').popup('open');
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+</script>
+@if (!(String.IsNullOrEmpty(Model.info.text)))
+{
+    <div data-role="popup" id="popupBasic" data-icon="delete">
+        <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+        <h2>@text</h2>
+        <p>@Model.info.text</p>
+    </div>
+    <script type="text/javascript">
+        $(document).on('pageinit', '.ui-page', function (event) {
+            setTimeout(function () {
+                $('#popupBasic').popup('open');
+            }, 200);
+        })
+    </script>
+}

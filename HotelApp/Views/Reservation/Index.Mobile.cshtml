@@ -1,0 +1,101 @@
+﻿@model HotelApp.Models.Message
+@{
+    string text = "test";
+    if (!(String.IsNullOrEmpty(Model.text)))
+    {
+        if (Model.type == 0)
+        { text = "Error"; }
+        else
+        { text = "Succes"; }
+    }
+    var roomsList = new HotelApp.Models.RoomsList();
+    foreach (SelectListItem item in roomsList.rooms)
+    {
+        if (item.Value == Model.idStr)
+        { item.Selected = true; }
+    }
+    ViewBag.Title = "Book room | H.";
+    Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
+}
+@if ((HotelApp.user)Session["user"] == null)
+{
+    <div class="ui-field-contain">
+        <button type="button" disabled="disabled" data-icon="eye">
+            <strong>Info: </strong>You have to bo sign in
+            <br />
+            to follow the reservation.</button>
+    </div>
+}
+else
+{
+    if (roomsList.rooms.Count() == 0)
+    {
+    <div class="ui-field-contain">
+        <button type="button" disabled="disabled" data-icon="eye">
+            <strong>Info: </strong>There are not rooms
+            <br />
+            in hotel's database.</button>
+    </div>
+    }
+    else
+    {
+    <div class="ui-field-contain">
+        <h2>Reservation form</h2>
+    </div>
+        using (Html.BeginForm("Book", "Reservation", FormMethod.Post, new { @onsubmit = "return checkDates()" }))
+        {
+    <div class="ui-field-contain">
+        <label for="bookRoom">Choose room:</label>
+        @Html.DropDownList("bookRoom", roomsList.rooms, "Choose your room from list", new { @id = "bookRoom" })
+    </div>
+    <div class="ui-field-contain">
+        <label for="bookStart">Reservation start:</label>
+        @Html.TextBox("bookStart", null, new { @id = "bookStart", @placeholder = "Format RRRR-MM-DD", @type = "date" })
+    </div>
+    <div class="ui-field-contain">
+        <label for="bookEnd">Reservation end:</label>
+        @Html.TextBox("bookEnd", null, new { @id = "bookEnd", @placeholder = "Format RRRR-MM-DD", @type = "date" })
+    </div>
+    <div class="ui-field-contain">
+        <button type="submit" class="ui-btn ui-icon-edit ui-btn-icon-right">Add reservation</button>
+    </div>
+        }
+    }
+}
+<script type="text/javascript">
+    function checkDates() {
+        var modelDate = new Date();
+        var today = new Date(modelDate.getFullYear(), modelDate.getMonth(), modelDate.getDate());
+        var tommarow = new Date(modelDate.getFullYear(), modelDate.getMonth(), modelDate.getDate() + 1);
+        var bookS = $("#bookStart").val();
+        var bookE = $("#bookEnd").val();
+        var bookSt = new Date(bookS.toString());
+        var bookEn = new Date(bookE.toString());
+        if (bookSt < today || bookEn < tommarow) {
+            $('#popupDates').popup('open');
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>
+<div data-role="popup" id="popupDates" data-icon="delete">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+    <h2>Error</h2>
+    <p>Start day can't be before today and end day before tomarrow.</p>
+</div>
+@if (!(String.IsNullOrEmpty(Model.text)))
+{
+    <div data-role="popup" id="popupBasic" data-icon="delete">
+        <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+        <h2>@text</h2>
+        <p>@Model.text</p>
+    </div>
+    <script type="text/javascript">
+        $(document).on('pageinit', '.ui-page', function (event) {
+            setTimeout(function () {
+                $('#popupBasic').popup('open');
+            }, 200);
+        })
+    </script>
+}

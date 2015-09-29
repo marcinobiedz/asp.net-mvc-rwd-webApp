@@ -1,0 +1,91 @@
+﻿@model HotelApp.Models.Message
+@{
+    string text = "test";
+    if (Model != null)
+    {
+        if (Model.type == 0)
+        { text = "Error"; }
+        else
+        { text = "Succes"; }
+    }
+    var regions = new HotelApp.Models.Countries();
+    ViewBag.Title = "Register | Hotel.";
+    Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
+}
+<div class="ui-field-contain">
+    <div class="ui-alt-icon" style="display: inline">
+        <a class="ui-btn ui-shadow ui-corner-all ui-icon-eye ui-btn-icon-notext ui-btn-inline"></a>
+    </div>
+    <div style="display: inline">
+        FILL ALL FIELDS TO MAKE ACCOUNT
+    </div>
+</div>
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @onsubmit = "return confirmDate()" }))
+{
+    <div class="ui-field-contain">
+        <label for="regEmail">Your e-mail address:</label>
+        @Html.TextBox("regEmail", null, new { @id = "regEmail", @placeholder = "Type your e-mail address...", @type = "email" })
+    </div>
+    <div class="ui-field-contain">
+        <label for="regPass">Password:</label>
+        @Html.Password("regPass", null, new { @id = "regPass", @autocomplete = "off", @type = "password", @placeholder = "Between 6-10 marks" })
+    </div>
+    <div class="ui-field-contain">
+        <label for="regConfPass">Confirm password:</label>
+        @Html.Password("regConfPass", null, new { @id = "regConfPass", @autocomplete = "off", @type = "password", @placeholder = "Same as previous field" })
+    </div>
+    <div class="ui-field-contain">
+        <label for="regEmail">Your name:</label>
+        @Html.TextBox("regName", null, new { @id = "regName", @placeholder = "Enter your name", @type = "text" })
+    </div>
+    <div class="ui-field-contain">
+        <label for="regEmail">Your surname:</label>
+        @Html.TextBox("regSurname", null, new { @id = "regSurname", @placeholder = "Enter your surname", @type = "text" })
+    </div>
+    <div class="ui-field-contain">
+        <label for="regCountry">Your nationality region:</label>
+        @Html.DropDownList("regCountry", regions.countryList, "Choose your region", new { @id = "regCountry" })
+    </div>
+    <div class="ui-field-contain">
+        <label for="regEmail">Your birthday date:</label>
+        @Html.TextBox("regBirth", null, new { @id = "regBirth", @placeholder = "Format RRRR-MM-DD", @type = "date" })
+    </div>
+    <div class="ui-field-contain">
+        <button type="submit" class="ui-btn ui-icon-edit ui-btn-icon-right">Create new account</button>
+    </div>
+}
+<script type="text/javascript">
+    function confirmDate() {
+        var depenDate = new Date();
+        depenDate.setYear(depenDate.getYear() - 18);
+        var userDate = $("#regBirth").val();
+        var date_regex = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+
+        if (!(date_regex.test(userDate))) {
+            $("#regBirth").val("");
+        } else {
+            var userD = new Date(userDate);
+            if (userD > depenDate) {
+                $("#regBirth").val("");
+            } else {
+                return true;
+            }
+        }
+        return true;
+    }
+</script>
+@if (Model != null)
+{
+    <div data-role="popup" id="popupBasic" data-icon="delete">
+        <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+        <h2>@text</h2>
+        <p>@Model.text</p>
+    </div>
+    <script type="text/javascript">
+        $(document).on('pageinit', '.ui-page', function (event) {
+            setTimeout(function () {
+                $('#popupBasic').popup('open');
+            }, 200);
+        })
+    </script>
+}

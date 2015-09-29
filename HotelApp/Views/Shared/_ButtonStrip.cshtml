@@ -1,0 +1,32 @@
+﻿<div class="buttonStrip">
+    <a href="@Url.Action("Index", "Home")">
+        <button id="home_BS">Home</button></a>
+    <a href="@Url.Action("Index", "Room")">
+        <button id="room_BS">Hotel rooms</button></a>
+    <a href="@Url.Action("Index", "Reservation")">
+        <button id="book_BS">Reservation</button></a>
+    <a href="@Url.Action("Index", "Contact")">
+        <button id="contact_BS">Contact</button></a>
+</div>
+<script type="text/javascript">
+    $("#contact_BS").button({
+        icons: {
+            secondary: "ui-icon-mail-closed"
+        }
+    });
+    $("#book_BS").button({
+        icons: {
+            secondary: "ui-icon-calendar"
+        }
+    });
+    $("#home_BS").button({
+        icons: {
+            secondary: "ui-icon-home"
+        }
+    });
+    $("#room_BS").button({
+        icons: {
+            secondary: "ui-icon-image"
+        }
+    });
+</script>

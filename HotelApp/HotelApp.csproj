@@ -1,0 +1,818 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B2F11EB0-E35E-46F6-BF20-E3252FC0BFE7}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HotelApp</RootNamespace>
+    <AssemblyName>HotelApp</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SimpleCrypto">
+      <HintPath>..\packages\SimpleCrypto.0.3.30.26\lib\SimpleCrypto.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.2\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\BundleMobileConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReservationController.cs" />
+    <Compile Include="Controllers\RoomController.cs" />
+    <Compile Include="Controllers\ViewSwitcherController.cs" />
+    <Compile Include="discount.cs">
+      <DependentUpon>HotelApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HotelApp.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HotelApp.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HotelApp.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HotelApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HotelApp.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HotelApp.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Countries.cs" />
+    <Compile Include="Models\HtmlExtensions.cs" />
+    <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\RoomsList.cs" />
+    <Compile Include="Models\UserPanel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="reservation.cs">
+      <DependentUpon>HotelApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="room.cs">
+      <DependentUpon>HotelApp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="user.cs">
+      <DependentUpon>HotelApp.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\HotelDB.sdf" />
+    <Content Include="Content\AnythingSlider-master\css3.html" />
+    <Content Include="Content\AnythingSlider-master\css\animate.css" />
+    <Content Include="Content\AnythingSlider-master\css\anythingslider.css" />
+    <Content Include="Content\AnythingSlider-master\css\theme-construction.css" />
+    <Content Include="Content\AnythingSlider-master\css\theme-cs-portfolio.css" />
+    <Content Include="Content\AnythingSlider-master\css\theme-metallic.css" />
+    <Content Include="Content\AnythingSlider-master\css\theme-minimalist-round.css" />
+    <Content Include="Content\AnythingSlider-master\css\theme-minimalist-square.css" />
+    <Content Include="Content\AnythingSlider-master\demos.html" />
+    <Content Include="Content\AnythingSlider-master\demos\colorbox\border.png" />
+    <Content Include="Content\AnythingSlider-master\demos\colorbox\colorbox.css" />
+    <Content Include="Content\AnythingSlider-master\demos\colorbox\controls.png" />
+    <Content Include="Content\AnythingSlider-master\demos\colorbox\ie6\borderBottomCenter.png" />
+    <Content Include="Content\AnythingSlider-master\demos\colorbox\ie6\borderBottomLeft.png" />
+    <Content Include="Content\AnythingSlider-master\demos\colorbox\ie6\borderBottomRight.png" />
+    <Content Include="Content\AnythingSlider-master\demos\colorbox\ie6\borderMiddleLeft.png" />
+    <Content Include="Content\AnythingSlider-master\demos\colorbox\ie6\borderMiddleRight.png" />
+    <Content Include="Content\AnythingSlider-master\demos\colorbox\ie6\borderTopCenter.png" />
+    <Content Include="Content\AnythingSlider-master\demos\colorbox\ie6\borderTopLeft.png" />
+    <Content Include="Content\AnythingSlider-master\demos\colorbox\ie6\borderTopRight.png" />
+    <Content Include="Content\AnythingSlider-master\demos\colorbox\jquery.colorbox-min.js" />
+    <Content Include="Content\AnythingSlider-master\demos\colorbox\jquery.colorbox.js" />
+    <Content Include="Content\AnythingSlider-master\demos\colorbox\loading.gif" />
+    <Content Include="Content\AnythingSlider-master\demos\colorbox\loading_background.png" />
+    <Content Include="Content\AnythingSlider-master\demos\colorbox\overlay.png" />
+    <Content Include="Content\AnythingSlider-master\demos\css\page.css" />
+    <Content Include="Content\AnythingSlider-master\demos\images\251356.jpg" />
+    <Content Include="Content\AnythingSlider-master\demos\images\apple-touch-icon.png" />
+    <Content Include="Content\AnythingSlider-master\demos\images\favicon.ico" />
+    <Content Include="Content\AnythingSlider-master\demos\images\slide-civil-1.jpg" />
+    <Content Include="Content\AnythingSlider-master\demos\images\slide-civil-2.jpg" />
+    <Content Include="Content\AnythingSlider-master\demos\images\slide-env-1.jpg" />
+    <Content Include="Content\AnythingSlider-master\demos\images\slide-env-2.jpg" />
+    <Content Include="Content\AnythingSlider-master\demos\images\slide-tele-1.jpg" />
+    <Content Include="Content\AnythingSlider-master\demos\images\slide-tele-2.jpg" />
+    <Content Include="Content\AnythingSlider-master\demos\images\th-slide-civil-1.jpg" />
+    <Content Include="Content\AnythingSlider-master\demos\images\th-slide-civil-2.jpg" />
+    <Content Include="Content\AnythingSlider-master\demos\images\th-slide-env-1.jpg" />
+    <Content Include="Content\AnythingSlider-master\demos\images\th-slide-env-2.jpg" />
+    <Content Include="Content\AnythingSlider-master\demos\js\css3demo.js" />
+    <Content Include="Content\AnythingSlider-master\demos\js\demo.js" />
+    <Content Include="Content\AnythingSlider-master\demos\js\jquery.jatt.min.js" />
+    <Content Include="Content\AnythingSlider-master\demos\prettify\prettify.css" />
+    <Content Include="Content\AnythingSlider-master\demos\prettify\prettify.js" />
+    <Content Include="Content\AnythingSlider-master\demos\video\movie.mp4" />
+    <Content Include="Content\AnythingSlider-master\expand.html" />
+    <Content Include="Content\AnythingSlider-master\images\arrows-metallic.png" />
+    <Content Include="Content\AnythingSlider-master\images\arrows-minimalist.png" />
+    <Content Include="Content\AnythingSlider-master\images\construction.gif" />
+    <Content Include="Content\AnythingSlider-master\images\cs-portfolio.png" />
+    <Content Include="Content\AnythingSlider-master\images\default.png" />
+    <Content Include="Content\AnythingSlider-master\index.html" />
+    <Content Include="Content\AnythingSlider-master\js\jquery.anythingslider.fx.js" />
+    <Content Include="Content\AnythingSlider-master\js\jquery.anythingslider.fx.min.js" />
+    <Content Include="Content\AnythingSlider-master\js\jquery.anythingslider.js" />
+    <Content Include="Content\AnythingSlider-master\js\jquery.anythingslider.min.js" />
+    <Content Include="Content\AnythingSlider-master\js\jquery.anythingslider.video.js" />
+    <Content Include="Content\AnythingSlider-master\js\jquery.anythingslider.video.min.js" />
+    <Content Include="Content\AnythingSlider-master\js\jquery.easing.1.2.js" />
+    <Content Include="Content\AnythingSlider-master\js\jquery.min.js" />
+    <Content Include="Content\AnythingSlider-master\js\swfobject.js" />
+    <Content Include="Content\AnythingSlider-master\license.txt" />
+    <Content Include="Content\AnythingSlider-master\simple.html" />
+    <Content Include="Content\AnythingSlider-master\video.html" />
+    <Content Include="Content\fonts2\adine_kirnberg-demo.html" />
+    <Content Include="Content\fonts2\adine_kirnberg-webfont.svg" />
+    <Content Include="Content\fonts2\generator_config.txt" />
+    <Content Include="Content\fonts2\specimen_files\adine_kirnberg-cleartype.png" />
+    <Content Include="Content\fonts2\specimen_files\easytabs.js" />
+    <Content Include="Content\fonts2\specimen_files\grid_12-825-55-15.css" />
+    <Content Include="Content\fonts2\specimen_files\specimen_stylesheet.css" />
+    <Content Include="Content\fonts2\stylesheet.css" />
+    <Content Include="Content\fonts\generator_config.txt" />
+    <Content Include="Content\fonts\helvetica_light-demo.html" />
+    <Content Include="Content\fonts\helvetica_light-webfont.svg" />
+    <Content Include="Content\fonts\specimen_files\easytabs.js" />
+    <Content Include="Content\fonts\specimen_files\grid_12-825-55-15.css" />
+    <Content Include="Content\fonts\specimen_files\helvetica_light-cleartype.png" />
+    <Content Include="Content\fonts\specimen_files\specimen_stylesheet.css" />
+    <Content Include="Content\fonts\stylesheet.css" />
+    <Content Include="Content\images\ajax-loader.gif" />
+    <Content Include="Content\images\ajax-loader.png" />
+    <Content Include="Content\images\backg.jpg" />
+    <Content Include="Content\images\favicon.ico" />
+    <Content Include="Content\images\homeSlider\Greece-beach.jpg" />
+    <Content Include="Content\images\icons-18-black.png" />
+    <Content Include="Content\images\icons-18-white.png" />
+    <Content Include="Content\images\icons-36-black.png" />
+    <Content Include="Content\images\icons-36-white.png" />
+    <Content Include="Content\images\icons-png\action-black.png" />
+    <Content Include="Content\images\icons-png\action-white.png" />
+    <Content Include="Content\images\icons-png\alert-black.png" />
+    <Content Include="Content\images\icons-png\alert-white.png" />
+    <Content Include="Content\images\icons-png\arrow-d-black.png" />
+    <Content Include="Content\images\icons-png\arrow-d-l-black.png" />
+    <Content Include="Content\images\icons-png\arrow-d-l-white.png" />
+    <Content Include="Content\images\icons-png\arrow-d-r-black.png" />
+    <Content Include="Content\images\icons-png\arrow-d-r-white.png" />
+    <Content Include="Content\images\icons-png\arrow-d-white.png" />
+    <Content Include="Content\images\icons-png\arrow-l-black.png" />
+    <Content Include="Content\images\icons-png\arrow-l-white.png" />
+    <Content Include="Content\images\icons-png\arrow-r-black.png" />
+    <Content Include="Content\images\icons-png\arrow-r-white.png" />
+    <Content Include="Content\images\icons-png\arrow-u-black.png" />
+    <Content Include="Content\images\icons-png\arrow-u-l-black.png" />
+    <Content Include="Content\images\icons-png\arrow-u-l-white.png" />
+    <Content Include="Content\images\icons-png\arrow-u-r-black.png" />
+    <Content Include="Content\images\icons-png\arrow-u-r-white.png" />
+    <Content Include="Content\images\icons-png\arrow-u-white.png" />
+    <Content Include="Content\images\icons-png\audio-black.png" />
+    <Content Include="Content\images\icons-png\audio-white.png" />
+    <Content Include="Content\images\icons-png\back-black.png" />
+    <Content Include="Content\images\icons-png\back-white.png" />
+    <Content Include="Content\images\icons-png\bars-black.png" />
+    <Content Include="Content\images\icons-png\bars-white.png" />
+    <Content Include="Content\images\icons-png\bullets-black.png" />
+    <Content Include="Content\images\icons-png\bullets-white.png" />
+    <Content Include="Content\images\icons-png\calendar-black.png" />
+    <Content Include="Content\images\icons-png\calendar-white.png" />
+    <Content Include="Content\images\icons-png\camera-black.png" />
+    <Content Include="Content\images\icons-png\camera-white.png" />
+    <Content Include="Content\images\icons-png\carat-d-black.png" />
+    <Content Include="Content\images\icons-png\carat-d-white.png" />
+    <Content Include="Content\images\icons-png\carat-l-black.png" />
+    <Content Include="Content\images\icons-png\carat-l-white.png" />
+    <Content Include="Content\images\icons-png\carat-r-black.png" />
+    <Content Include="Content\images\icons-png\carat-r-white.png" />
+    <Content Include="Content\images\icons-png\carat-u-black.png" />
+    <Content Include="Content\images\icons-png\carat-u-white.png" />
+    <Content Include="Content\images\icons-png\check-black.png" />
+    <Content Include="Content\images\icons-png\check-white.png" />
+    <Content Include="Content\images\icons-png\clock-black.png" />
+    <Content Include="Content\images\icons-png\clock-white.png" />
+    <Content Include="Content\images\icons-png\cloud-black.png" />
+    <Content Include="Content\images\icons-png\cloud-white.png" />
+    <Content Include="Content\images\icons-png\comment-black.png" />
+    <Content Include="Content\images\icons-png\comment-white.png" />
+    <Content Include="Content\images\icons-png\delete-black.png" />
+    <Content Include="Content\images\icons-png\delete-white.png" />
+    <Content Include="Content\images\icons-png\edit-black.png" />
+    <Content Include="Content\images\icons-png\edit-white.png" />
+    <Content Include="Content\images\icons-png\eye-black.png" />
+    <Content Include="Content\images\icons-png\eye-white.png" />
+    <Content Include="Content\images\icons-png\forbidden-black.png" />
+    <Content Include="Content\images\icons-png\forbidden-white.png" />
+    <Content Include="Content\images\icons-png\forward-black.png" />
+    <Content Include="Content\images\icons-png\forward-white.png" />
+    <Content Include="Content\images\icons-png\gear-black.png" />
+    <Content Include="Content\images\icons-png\gear-white.png" />
+    <Content Include="Content\images\icons-png\grid-black.png" />
+    <Content Include="Content\images\icons-png\grid-white.png" />
+    <Content Include="Content\images\icons-png\heart-black.png" />
+    <Content Include="Content\images\icons-png\heart-white.png" />
+    <Content Include="Content\images\icons-png\home-black.png" />
+    <Content Include="Content\images\icons-png\home-white.png" />
+    <Content Include="Content\images\icons-png\info-black.png" />
+    <Content Include="Content\images\icons-png\info-white.png" />
+    <Content Include="Content\images\icons-png\location-black.png" />
+    <Content Include="Content\images\icons-png\location-white.png" />
+    <Content Include="Content\images\icons-png\lock-black.png" />
+    <Content Include="Content\images\icons-png\lock-white.png" />
+    <Content Include="Content\images\icons-png\mail-black.png" />
+    <Content Include="Content\images\icons-png\mail-white.png" />
+    <Content Include="Content\images\icons-png\minus-black.png" />
+    <Content Include="Content\images\icons-png\minus-white.png" />
+    <Content Include="Content\images\icons-png\navigation-black.png" />
+    <Content Include="Content\images\icons-png\navigation-white.png" />
+    <Content Include="Content\images\icons-png\phone-black.png" />
+    <Content Include="Content\images\icons-png\phone-white.png" />
+    <Content Include="Content\images\icons-png\plus-black.png" />
+    <Content Include="Content\images\icons-png\plus-white.png" />
+    <Content Include="Content\images\icons-png\power-black.png" />
+    <Content Include="Content\images\icons-png\power-white.png" />
+    <Content Include="Content\images\icons-png\recycle-black.png" />
+    <Content Include="Content\images\icons-png\recycle-white.png" />
+    <Content Include="Content\images\icons-png\refresh-black.png" />
+    <Content Include="Content\images\icons-png\refresh-white.png" />
+    <Content Include="Content\images\icons-png\search-black.png" />
+    <Content Include="Content\images\icons-png\search-white.png" />
+    <Content Include="Content\images\icons-png\shop-black.png" />
+    <Content Include="Content\images\icons-png\shop-white.png" />
+    <Content Include="Content\images\icons-png\star-black.png" />
+    <Content Include="Content\images\icons-png\star-white.png" />
+    <Content Include="Content\images\icons-png\tag-black.png" />
+    <Content Include="Content\images\icons-png\tag-white.png" />
+    <Content Include="Content\images\icons-png\user-black.png" />
+    <Content Include="Content\images\icons-png\user-white.png" />
+    <Content Include="Content\images\icons-png\video-black.png" />
+    <Content Include="Content\images\icons-png\video-white.png" />
+    <Content Include="Content\images\icons-svg\action-black.svg" />
+    <Content Include="Content\images\icons-svg\action-white.svg" />
+    <Content Include="Content\images\icons-svg\alert-black.svg" />
+    <Content Include="Content\images\icons-svg\alert-white.svg" />
+    <Content Include="Content\images\icons-svg\arrow-d-black.svg" />
+    <Content Include="Content\images\icons-svg\arrow-d-l-black.svg" />
+    <Content Include="Content\images\icons-svg\arrow-d-l-white.svg" />
+    <Content Include="Content\images\icons-svg\arrow-d-r-black.svg" />
+    <Content Include="Content\images\icons-svg\arrow-d-r-white.svg" />
+    <Content Include="Content\images\icons-svg\arrow-d-white.svg" />
+    <Content Include="Content\images\icons-svg\arrow-l-black.svg" />
+    <Content Include="Content\images\icons-svg\arrow-l-white.svg" />
+    <Content Include="Content\images\icons-svg\arrow-r-black.svg" />
+    <Content Include="Content\images\icons-svg\arrow-r-white.svg" />
+    <Content Include="Content\images\icons-svg\arrow-u-black.svg" />
+    <Content Include="Content\images\icons-svg\arrow-u-l-black.svg" />
+    <Content Include="Content\images\icons-svg\arrow-u-l-white.svg" />
+    <Content Include="Content\images\icons-svg\arrow-u-r-black.svg" />
+    <Content Include="Content\images\icons-svg\arrow-u-r-white.svg" />
+    <Content Include="Content\images\icons-svg\arrow-u-white.svg" />
+    <Content Include="Content\images\icons-svg\audio-black.svg" />
+    <Content Include="Content\images\icons-svg\audio-white.svg" />
+    <Content Include="Content\images\icons-svg\back-black.svg" />
+    <Content Include="Content\images\icons-svg\back-white.svg" />
+    <Content Include="Content\images\icons-svg\bars-black.svg" />
+    <Content Include="Content\images\icons-svg\bars-white.svg" />
+    <Content Include="Content\images\icons-svg\bullets-black.svg" />
+    <Content Include="Content\images\icons-svg\bullets-white.svg" />
+    <Content Include="Content\images\icons-svg\calendar-black.svg" />
+    <Content Include="Content\images\icons-svg\calendar-white.svg" />
+    <Content Include="Content\images\icons-svg\camera-black.svg" />
+    <Content Include="Content\images\icons-svg\camera-white.svg" />
+    <Content Include="Content\images\icons-svg\carat-d-black.svg" />
+    <Content Include="Content\images\icons-svg\carat-d-white.svg" />
+    <Content Include="Content\images\icons-svg\carat-l-black.svg" />
+    <Content Include="Content\images\icons-svg\carat-l-white.svg" />
+    <Content Include="Content\images\icons-svg\carat-r-black.svg" />
+    <Content Include="Content\images\icons-svg\carat-r-white.svg" />
+    <Content Include="Content\images\icons-svg\carat-u-black.svg" />
+    <Content Include="Content\images\icons-svg\carat-u-white.svg" />
+    <Content Include="Content\images\icons-svg\check-black.svg" />
+    <Content Include="Content\images\icons-svg\check-white.svg" />
+    <Content Include="Content\images\icons-svg\clock-black.svg" />
+    <Content Include="Content\images\icons-svg\clock-white.svg" />
+    <Content Include="Content\images\icons-svg\cloud-black.svg" />
+    <Content Include="Content\images\icons-svg\cloud-white.svg" />
+    <Content Include="Content\images\icons-svg\comment-black.svg" />
+    <Content Include="Content\images\icons-svg\comment-white.svg" />
+    <Content Include="Content\images\icons-svg\delete-black.svg" />
+    <Content Include="Content\images\icons-svg\delete-white.svg" />
+    <Content Include="Content\images\icons-svg\edit-black.svg" />
+    <Content Include="Content\images\icons-svg\edit-white.svg" />
+    <Content Include="Content\images\icons-svg\eye-black.svg" />
+    <Content Include="Content\images\icons-svg\eye-white.svg" />
+    <Content Include="Content\images\icons-svg\forbidden-black.svg" />
+    <Content Include="Content\images\icons-svg\forbidden-white.svg" />
+    <Content Include="Content\images\icons-svg\forward-black.svg" />
+    <Content Include="Content\images\icons-svg\forward-white.svg" />
+    <Content Include="Content\images\icons-svg\gear-black.svg" />
+    <Content Include="Content\images\icons-svg\gear-white.svg" />
+    <Content Include="Content\images\icons-svg\grid-black.svg" />
+    <Content Include="Content\images\icons-svg\grid-white.svg" />
+    <Content Include="Content\images\icons-svg\heart-black.svg" />
+    <Content Include="Content\images\icons-svg\heart-white.svg" />
+    <Content Include="Content\images\icons-svg\home-black.svg" />
+    <Content Include="Content\images\icons-svg\home-white.svg" />
+    <Content Include="Content\images\icons-svg\info-black.svg" />
+    <Content Include="Content\images\icons-svg\info-white.svg" />
+    <Content Include="Content\images\icons-svg\location-black.svg" />
+    <Content Include="Content\images\icons-svg\location-white.svg" />
+    <Content Include="Content\images\icons-svg\lock-black.svg" />
+    <Content Include="Content\images\icons-svg\lock-white.svg" />
+    <Content Include="Content\images\icons-svg\mail-black.svg" />
+    <Content Include="Content\images\icons-svg\mail-white.svg" />
+    <Content Include="Content\images\icons-svg\minus-black.svg" />
+    <Content Include="Content\images\icons-svg\minus-white.svg" />
+    <Content Include="Content\images\icons-svg\navigation-black.svg" />
+    <Content Include="Content\images\icons-svg\navigation-white.svg" />
+    <Content Include="Content\images\icons-svg\phone-black.svg" />
+    <Content Include="Content\images\icons-svg\phone-white.svg" />
+    <Content Include="Content\images\icons-svg\plus-black.svg" />
+    <Content Include="Content\images\icons-svg\plus-white.svg" />
+    <Content Include="Content\images\icons-svg\power-black.svg" />
+    <Content Include="Content\images\icons-svg\power-white.svg" />
+    <Content Include="Content\images\icons-svg\recycle-black.svg" />
+    <Content Include="Content\images\icons-svg\recycle-white.svg" />
+    <Content Include="Content\images\icons-svg\refresh-black.svg" />
+    <Content Include="Content\images\icons-svg\refresh-white.svg" />
+    <Content Include="Content\images\icons-svg\search-black.svg" />
+    <Content Include="Content\images\icons-svg\search-white.svg" />
+    <Content Include="Content\images\icons-svg\shop-black.svg" />
+    <Content Include="Content\images\icons-svg\shop-white.svg" />
+    <Content Include="Content\images\icons-svg\star-black.svg" />
+    <Content Include="Content\images\icons-svg\star-white.svg" />
+    <Content Include="Content\images\icons-svg\tag-black.svg" />
+    <Content Include="Content\images\icons-svg\tag-white.svg" />
+    <Content Include="Content\images\icons-svg\user-black.svg" />
+    <Content Include="Content\images\icons-svg\user-white.svg" />
+    <Content Include="Content\images\icons-svg\video-black.svg" />
+    <Content Include="Content\images\icons-svg\video-white.svg" />
+    <Content Include="Content\images\stars.png" />
+    <Content Include="Content\images\homeSlider\transp.png" />
+    <Content Include="Content\jquery.mobile-1.4.2.css" />
+    <Content Include="Content\jquery.mobile.external-png-1.4.2.css" />
+    <Content Include="Content\jquery.mobile.external-png-1.4.2.min.css" />
+    <Content Include="Content\jquery.mobile.icons-1.4.2.css" />
+    <Content Include="Content\jquery.mobile.icons-1.4.2.min.css" />
+    <Content Include="Content\jquery.mobile.inline-png-1.4.2.css" />
+    <Content Include="Content\jquery.mobile.inline-png-1.4.2.min.css" />
+    <Content Include="Content\jquery.mobile.inline-svg-1.4.2.css" />
+    <Content Include="Content\jquery.mobile.inline-svg-1.4.2.min.css" />
+    <Content Include="Content\jquery.mobile.structure-1.4.2.css" />
+    <Content Include="Content\jquery.mobile.structure-1.4.2.min.css" />
+    <Content Include="Content\jquery.mobile.theme-1.4.2.css" />
+    <Content Include="Content\jquery.mobile.theme-1.4.2.min.css" />
+    <Content Include="Content\Site.Mobile.css" />
+    <Content Include="Content\socialSmall\facebook-Icon.png" />
+    <Content Include="Content\socialSmall\Google-plus-icon.png" />
+    <Content Include="Content\socialSmall\Instagram-Icon.png" />
+    <Content Include="Content\socialSmall\Twitter-Icon-2.png" />
+    <Content Include="Content\socialSmall\Youtube-Icon.png" />
+    <Content Include="Content\social\facebook-Icon.png" />
+    <Content Include="Content\social\Google-plus-icon.png" />
+    <Content Include="Content\social\Instagram-Icon.png" />
+    <Content Include="Content\social\Twitter-Icon-2.png" />
+    <Content Include="Content\social\Youtube-Icon.png" />
+    <Content Include="Content\themes\base\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.menu.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.spinner.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\jquery.ui.tooltip.css" />
+    <Content Include="Content\themes\base\minified\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Content\themes\jquery-ui-1.10.4.custom\css\custom-theme\images\animated-overlay.gif" />
+    <Content Include="Content\themes\jquery-ui-1.10.4.custom\css\custom-theme\images\ui-bg_diagonals-medium_20_6B888C_40x40.png" />
+    <Content Include="Content\themes\jquery-ui-1.10.4.custom\css\custom-theme\images\ui-bg_flat_100_BF9958_40x100.png" />
+    <Content Include="Content\themes\jquery-ui-1.10.4.custom\css\custom-theme\images\ui-bg_flat_30_735C35_40x100.png" />
+    <Content Include="Content\themes\jquery-ui-1.10.4.custom\css\custom-theme\images\ui-bg_flat_30_cccccc_40x100.png" />
+    <Content Include="Content\themes\jquery-ui-1.10.4.custom\css\custom-theme\images\ui-bg_flat_45_735C35_40x100.png" />
+    <Content Include="Content\themes\jquery-ui-1.10.4.custom\css\custom-theme\images\ui-bg_flat_50_5c5c5c_40x100.png" />
+    <Content Include="Content\themes\jquery-ui-1.10.4.custom\css\custom-theme\images\ui-bg_flat_70_735C35_40x100.png" />
+    <Content Include="Content\themes\jquery-ui-1.10.4.custom\css\custom-theme\images\ui-bg_flat_90_735C35_40x100.png" />
+    <Content Include="Content\themes\jquery-ui-1.10.4.custom\css\custom-theme\images\ui-bg_highlight-soft_100_ffffff_1x100.png" />
+    <Content Include="Content\themes\jquery-ui-1.10.4.custom\css\custom-theme\images\ui-icons_1C1C1C_256x240.png" />
+    <Content Include="Content\themes\jquery-ui-1.10.4.custom\css\custom-theme\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\jquery-ui-1.10.4.custom\css\custom-theme\jquery-ui-1.10.4.custom.css" />
+    <Content Include="Content\themes\jquery-ui-1.10.4.custom\css\custom-theme\jquery-ui-1.10.4.custom.min.css" />
+    <Content Include="Content\themes\jquery-ui-1.10.4.custom\js\jquery-1.10.2.js" />
+    <Content Include="Content\themes\jquery-ui-1.10.4.custom\js\jquery-ui-1.10.4.custom.js" />
+    <Content Include="Content\themes\jquery-ui-1.10.4.custom\js\jquery-ui-1.10.4.custom.min.js" />
+    <Content Include="Content\themes\mobileTheme\custom.css" />
+    <Content Include="Content\themes\mobileTheme\custom.min.css" />
+    <Content Include="Content\themes\mobileTheme\images\ajax-loader.gif" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\action-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\action-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\alert-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\alert-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\arrow-d-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\arrow-d-l-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\arrow-d-l-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\arrow-d-r-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\arrow-d-r-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\arrow-d-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\arrow-l-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\arrow-l-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\arrow-r-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\arrow-r-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\arrow-u-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\arrow-u-l-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\arrow-u-l-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\arrow-u-r-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\arrow-u-r-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\arrow-u-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\audio-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\audio-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\back-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\back-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\bars-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\bars-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\bullets-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\bullets-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\calendar-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\calendar-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\camera-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\camera-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\carat-d-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\carat-d-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\carat-l-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\carat-l-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\carat-r-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\carat-r-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\carat-u-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\carat-u-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\check-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\check-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\clock-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\clock-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\cloud-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\cloud-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\comment-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\comment-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\delete-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\delete-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\edit-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\edit-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\eye-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\eye-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\forbidden-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\forbidden-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\forward-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\forward-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\gear-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\gear-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\grid-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\grid-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\heart-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\heart-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\home-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\home-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\info-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\info-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\location-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\location-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\lock-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\lock-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\mail-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\mail-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\minus-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\minus-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\navigation-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\navigation-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\phone-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\phone-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\plus-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\plus-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\power-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\power-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\recycle-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\recycle-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\refresh-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\refresh-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\search-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\search-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\shop-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\shop-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\star-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\star-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\tag-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\tag-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\user-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\user-white.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\video-black.png" />
+    <Content Include="Content\themes\mobileTheme\images\icons-png\video-white.png" />
+    <Content Include="Content\themes\mobileTheme\jquery.mobile.icons.min.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\fonts\helvetica_light-webfont.eot" />
+    <Content Include="Content\fonts\helvetica_light-webfont.ttf" />
+    <Content Include="Content\fonts\helvetica_light-webfont.woff" />
+    <Content Include="Content\fonts2\adine_kirnberg-webfont.eot" />
+    <Content Include="Content\fonts2\adine_kirnberg-webfont.ttf" />
+    <Content Include="Content\fonts2\adine_kirnberg-webfont.woff" />
+    <Content Include="Content\AnythingSlider-master\.gitattributes" />
+    <Content Include="Content\AnythingSlider-master\.gitignore" />
+    <Content Include="Content\AnythingSlider-master\anythingslider.jquery.json" />
+    <Content Include="Content\AnythingSlider-master\component.json" />
+    <Content Include="Content\AnythingSlider-master\css\LESS\anythingslider.less" />
+    <Content Include="Content\AnythingSlider-master\css\LESS\theme-construction.less" />
+    <Content Include="Content\AnythingSlider-master\css\LESS\theme-cs-portfolio.less" />
+    <Content Include="Content\AnythingSlider-master\css\LESS\theme-metallic.less" />
+    <Content Include="Content\AnythingSlider-master\css\LESS\theme-minimalist-round.less" />
+    <Content Include="Content\AnythingSlider-master\css\LESS\theme-minimalist-square.less" />
+    <Content Include="Content\AnythingSlider-master\demos\video\movie.ogg" />
+    <Content Include="Content\AnythingSlider-master\demos\video\movie.webm" />
+    <Content Include="Content\AnythingSlider-master\package.json" />
+    <Content Include="Content\AnythingSlider-master\README.md" />
+    <EntityDeploy Include="HotelApp.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HotelApp.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="HotelApp.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HotelApp.edmx</DependentUpon>
+      <LastGenOutput>HotelApp.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="HotelApp.edmx.diagram">
+      <DependentUpon>HotelApp.edmx</DependentUpon>
+    </Content>
+    <Content Include="HotelApp.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HotelApp.edmx</DependentUpon>
+      <LastGenOutput>HotelApp.cs</LastGenOutput>
+    </Content>
+    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="RoomPhotos\1\1.jpg" />
+    <Content Include="RoomPhotos\1\2.jpg" />
+    <Content Include="RoomPhotos\2\1.jpg" />
+    <Content Include="RoomPhotos\2\2.jpg" />
+    <Content Include="RoomPhotos\3\1.jpg" />
+    <Content Include="RoomPhotos\3\2.jpg" />
+    <Content Include="RoomPhotos\4\1.jpg" />
+    <Content Include="RoomPhotos\4\2.jpg" />
+    <Content Include="Scripts\jquery-1.8.2.js" />
+    <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <Content Include="Scripts\jquery.mobile-1.4.2.js" />
+    <Content Include="Scripts\jquery.mobile-1.4.2.min.js" />
+    <Content Include="Scripts\jquery.mobile-1.4.2.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.10.4.js" />
+    <Content Include="Scripts\jquery-ui-1.10.4.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-2.2.0.debug.js" />
+    <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_ViewSwitcher.cshtml" />
+    <Content Include="Views\Shared\_Layout.Mobile.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Shared\_LoginPanel.cshtml" />
+    <Content Include="Views\Shared\_Logo.cshtml" />
+    <Content Include="Views\Account\Forgot.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Shared\_ButtonStrip.cshtml" />
+    <Content Include="Views\Room\Index.cshtml" />
+    <Content Include="Views\Reservation\Index.cshtml" />
+    <Content Include="Views\Reservation\User.cshtml" />
+    <Content Include="Views\Home\Index.Mobile.cshtml" />
+    <Content Include="Views\Account\Register.Mobile.cshtml" />
+    <Content Include="Views\Account\Forgot.Mobile.cshtml" />
+    <Content Include="Views\Account\Index.Mobile.cshtml" />
+    <Content Include="Views\Room\Index.Mobile.cshtml" />
+    <Content Include="Views\Contact\Index.Mobile.cshtml" />
+    <Content Include="Views\Reservation\Index.Mobile.cshtml" />
+    <Content Include="Views\Reservation\User.Mobile.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>63675</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:54621/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

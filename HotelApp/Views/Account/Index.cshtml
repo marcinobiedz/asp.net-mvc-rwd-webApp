@@ -1,0 +1,129 @@
+﻿@model HotelApp.Models.UserPanel
+@{
+    string text = "test";
+    if (!(String.IsNullOrEmpty(Model.info.text)))
+    {
+        if (Model.info.type == 0)
+        { text = "Error"; }
+        else
+        { text = "Succes"; }
+    }
+    ViewBag.Title = "User account | Mohijto Soho Hotel.";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var regions = new HotelApp.Models.Countries();
+    foreach (SelectListItem item in regions.countryList)
+    {
+        if (item.Value == Model.user.country)
+        { item.Selected = true; }
+    }
+    string userDate = Model.user.birth_date.ToShortDateString();
+}
+<div class="commonDiv">
+    <div class="mainWrap">
+        @using (Html.BeginForm("Index", "Account", FormMethod.Post))
+        {
+            <fieldset>
+                <legend>MODIFY YOUR ACCOUNT</legend>
+                <table>
+                    <tr>
+                        <td>
+                            <table class="regTable">
+                                <tr>
+                                    <td>
+                                        <label>E-mail address:</label>
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.user.email, new { @type = "email", @placeholder = "Enter your email", @disabled = "" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>New password:</label>
+                                    </td>
+                                    <td>
+                                        @Html.PasswordFor(m => m.user.password, new { @type = "password", @placeholder = "Type if you're changing" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Your name:</label>
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.user.name, new { @type = "text", @placeholder = "Enter your name" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Your surname:</label>
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.user.surname, new { @type = "text", @placeholder = "Enter your surname" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Your nationality region:</label>
+                                    </td>
+                                    <td>
+                                        @Html.DropDownListFor(m => m.user.country, regions.countryList, new { @id = "combobox" })
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <label>Change your birth date:</label>
+                            <div id="datepicker"></div>
+                            @Html.Hidden("userBirth", userDate, new { @id = "userBirth" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left">
+                            <ul id="icons" class="ui-widget ui-helper-clearfix">
+                                <li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-notice"></span></li>
+                                <li>CHANGE FIELDS AND CONFIRM TO UPDATE USER DATA</li>
+                            </ul>
+                            <td style="text-align: right">
+                                <input type="submit" value="Change user" /></td>
+                    </tr>
+                </table>
+            </fieldset>
+        }
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#datepicker').datepicker({
+            yearRange: "1930:2020",
+            maxDate: "-18y",
+            firstDay: 1,
+            defaultDate: new Date("@userDate"),
+            dateFormat: "yy-mm-dd",
+            onSelect: function (date) {
+                $("#userBirth").val(date);
+            },
+            changeMonth: true,
+            changeYear: true
+        });
+    });
+</script>
+@if (!(String.IsNullOrEmpty(Model.info.text)))
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#dialog-message").dialog({
+                modal: true,
+                buttons: {
+                    Ok: function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        });
+    </script>
+    <div id="dialog-message" title="@text">
+        <ul id="icons" class="ui-widget ui-helper-clearfix">
+            <li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-notice"></span></li>
+            <li>@Model.info.text</li>
+        </ul>
+    </div>
+}

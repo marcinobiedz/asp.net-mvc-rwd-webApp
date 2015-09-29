@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Contact | Mohijto Soho Hotel.";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="position: relative;">
+    <div id="map_canvas"></div>
+    <div class="contactBox">
+        <table>
+            <tr>
+                <td colspan="2">CONTACT DETAILS
+                    <hr />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <ul id="icons" class="ui-widget ui-helper-clearfix">
+                        <li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-calculator"></span></li>
+                    </ul>
+                </td>
+                <td><strong>Phone: </strong>+351 159 753 655</td>
+            </tr>
+            <tr>
+                <td>
+                    <ul id="icons" class="ui-widget ui-helper-clearfix">
+                        <li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-note"></span></li>
+                    </ul>
+                </td>
+                <td><strong>Fax: </strong>+351 159 754 844</td>
+            </tr>
+            <tr>
+                <td>
+                    <ul id="icons" class="ui-widget ui-helper-clearfix">
+                        <li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-mail-open"></span></li>
+                    </ul>
+                </td>
+                <td><strong>E-mail: </strong>contact&#64mohijtosoho.com</td>
+            </tr>
+            <tr>
+                <td>
+                    <ul id="icons" class="ui-widget ui-helper-clearfix">
+                        <li class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-home"></span></li>
+                    </ul>
+                </td>
+                <td><strong>Address: </strong>18 Laisa Street, Santorini, Greece</td>
+            </tr>
+            <tr>
+                <td colspan="2">SOCIAL MEDIA
+                    <hr />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <a class="noTD" href="@Url.Action("Index", "Home")">
+                        <img src="~/Content/social/facebook-Icon.png" />
+                    </a>
+                    <a class="noTD" href="@Url.Action("Index", "Home")">
+                        <img src="~/Content/social/Google-plus-icon.png" />
+                    </a>
+                    <a class="noTD" href="@Url.Action("Index", "Home")">
+                        <img src="~/Content/social/Instagram-Icon.png" />
+                    </a>
+                    <a class="noTD" href="@Url.Action("Index", "Home")">
+                        <img src="~/Content/social/Twitter-Icon-2.png" />
+                    </a>
+                    <a class="noTD" href="@Url.Action("Index", "Home")">
+                        <img src="~/Content/social/Youtube-Icon.png" />
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function initMap() {
+        var wspolrzedne = new google.maps.LatLng(36.3601, 25.4035);
+        var opcjeMapy = {
+            zoom: Number(15),
+            center: wspolrzedne
+        };
+        mapa = new google.maps.Map(document.getElementById('map_canvas'), opcjeMapy);
+
+        var punkt = new google.maps.LatLng(36.360895, 25.409644);
+        var opcjeMarkera =
+		{
+		    position: punkt,
+		    draggable: false,
+		    map: mapa,
+		    title: "Mohijto Soho Hotel."
+		}
+        var marker = new google.maps.Marker(opcjeMarkera);
+    }
+    initMap();
+</script>
